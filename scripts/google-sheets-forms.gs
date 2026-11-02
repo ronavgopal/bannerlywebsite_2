@@ -1,7 +1,7 @@
 /**
  * Bannerly form responses → Google Sheets.
  *
- * Bound to the "Bannerly Form Responses" spreadsheet and deployed as a web app.
+ * Writes to the "Bannerly Form Responses" spreadsheet and is deployed as a web app.
  * The website (src/bannerly/actions.ts) posts each form submission here as JSON:
  *   { form: "<form kind>", submittedAt: "<ISO date>", fields: { ... } }
  * Each form gets its own tab with a formatted header row.
@@ -10,6 +10,9 @@
  * Who has access: Anyone), then set FORMS_WEBHOOK_URL in Vercel to the
  * web app URL.
  */
+
+/** ID of the "Bannerly Form Responses" spreadsheet (from its URL). */
+const SHEET_ID = "1A9ogPhHsyiIczzPMaz-fMCDSATrX8MNZVEG9oSIjjts";
 
 const FORMS = {
   "nonprofit-application": {
@@ -83,14 +86,14 @@ function doPost(e) {
 
 /** Creates every tab with its header row. Run once from the editor. */
 function setup() {
-  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  const ss = SpreadsheetApp.openById(SHEET_ID);
   Object.values(FORMS).forEach(sheet_);
   const blank = ss.getSheetByName("Sheet1");
   if (blank && blank.getLastRow() === 0) ss.deleteSheet(blank);
 }
 
 function sheet_(form) {
-  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  const ss = SpreadsheetApp.openById(SHEET_ID);
   let sheet = ss.getSheetByName(form.tab);
   if (sheet) return sheet;
 
