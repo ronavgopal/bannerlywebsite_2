@@ -439,16 +439,20 @@ export function Team({
               {group.label}
             </h3>
             <ul className="flex flex-wrap justify-center gap-4">
-              {group.people.map((person) => (
+              {group.people.map((person, i) => (
                 <li
-                  key={person.name}
+                  key={`${person.name}-${i}`}
                   className="border-border flex w-[170px] flex-col items-center gap-3 rounded-lg border p-5 text-center"
                 >
                   <span
                     aria-hidden
                     className="bg-accent-100 text-accent-600 flex size-14 items-center justify-center rounded-full text-xl font-medium"
                   >
-                    {person.name.charAt(0)}
+                    {person.name === "To be announced" ? (
+                      <FlagMark className="size-6 opacity-60" />
+                    ) : (
+                      person.name.charAt(0)
+                    )}
                   </span>
                   <div className="flex flex-col">
                     <p className="font-medium">{person.name}</p>
@@ -609,6 +613,144 @@ export function FormSection({
         </header>
         <BannerlyForm fields={fields} kind={kind} submitLabel={submitLabel} />
       </div>
+    </Section>
+  );
+}
+
+/* -------------------------------------------------------------------------- */
+/*                                  Instagram                                 */
+/* -------------------------------------------------------------------------- */
+
+export function InstagramFeed({
+  tag,
+  title,
+  subtitle,
+  handle,
+  posts,
+}: {
+  tag?: string;
+  title: string;
+  subtitle?: string;
+  handle: string;
+  /** Post shortcodes, newest first: the part after /p/ or /reel/ in the post's link. */
+  posts: string[];
+}) {
+  return (
+    <Section>
+      <Heading subtitle={subtitle} tag={tag}>
+        <h2>{title}</h2>
+      </Heading>
+      <ul className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-5">
+        {posts.map((code) => (
+          <li
+            key={code}
+            className="border-border bg-surface-primary overflow-hidden rounded-xl border"
+          >
+            <iframe
+              className="block h-[560px] w-full border-0"
+              loading="lazy"
+              scrolling="no"
+              src={`https://www.instagram.com/p/${code}/embed`}
+              title={`Instagram post by @${handle}`}
+            />
+          </li>
+        ))}
+      </ul>
+      <ButtonLink
+        href={`https://www.instagram.com/${handle}/`}
+        intent="secondary"
+        rel="noreferrer"
+        size="lg"
+        target="_blank"
+      >
+        Follow @{handle} on Instagram
+      </ButtonLink>
+    </Section>
+  );
+}
+
+/* -------------------------------------------------------------------------- */
+/*                                   Founder                                  */
+/* -------------------------------------------------------------------------- */
+
+export function Founder({
+  title,
+  name,
+  role,
+  intro,
+  volunteering,
+  extracurriculars,
+}: {
+  title: string;
+  name: string;
+  role: string;
+  intro: string[];
+  volunteering: { text: string; href?: string; linkLabel?: string }[];
+  extracurriculars: string[];
+}) {
+  return (
+    <Section>
+      <article className="border-border bg-surface-secondary flex w-full flex-col gap-10 rounded-xl border p-6 md:p-10 lg:flex-row lg:gap-16">
+        <div className="flex flex-col gap-4 lg:w-2/5">
+          <p className="text-accent-500 text-sm font-medium">{role}</p>
+          <h2 className="text-3xl font-medium tracking-tighter md:text-4xl">{title}</h2>
+          <div className="flex items-center gap-3">
+            <span
+              aria-hidden
+              className="bg-accent-500 text-text-on-accent-primary flex size-12 items-center justify-center rounded-full text-lg font-medium"
+            >
+              {name.charAt(0)}
+            </span>
+            <p className="text-lg font-medium">{name}</p>
+          </div>
+          {intro.map((p) => (
+            <p key={p.slice(0, 24)} className="text-text-secondary text-pretty">
+              {p}
+            </p>
+          ))}
+        </div>
+        <div className="grid flex-1 gap-5 md:grid-cols-2">
+          <div className="border-border bg-surface-primary flex flex-col gap-4 rounded-lg border p-5">
+            <h3 className="text-lg font-medium">Volunteering</h3>
+            <ul className="flex flex-col gap-3">
+              {volunteering.map((item) => (
+                <li key={item.text} className="text-text-secondary flex items-start gap-3">
+                  <CheckIcon className="text-accent-500 mt-1 size-4 shrink-0" />
+                  <span>
+                    {item.text}
+                    {item.href ? (
+                      <>
+                        {" "}
+                        (
+                        <a
+                          className="text-accent-500 underline-offset-2 hover:underline"
+                          href={item.href}
+                          rel="noreferrer"
+                          target="_blank"
+                        >
+                          {item.linkLabel ?? item.href}
+                        </a>
+                        )
+                      </>
+                    ) : null}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="border-border bg-surface-primary flex flex-col gap-4 rounded-lg border p-5">
+            <h3 className="text-lg font-medium">Extracurriculars</h3>
+            <ul className="flex flex-col gap-3">
+              {extracurriculars.map((item) => (
+                <li key={item} className="text-text-secondary flex items-start gap-3">
+                  <CheckIcon className="text-accent-500 mt-1 size-4 shrink-0" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </article>
     </Section>
   );
 }

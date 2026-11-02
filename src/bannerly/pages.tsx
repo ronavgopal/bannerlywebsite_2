@@ -21,7 +21,8 @@ import {
   IconGrid,
   Packages,
   PageHero,
-  PostTiles,
+  InstagramFeed,
+  Founder,
   Stats,
   Steps,
   Story,
@@ -54,7 +55,7 @@ function HomePage() {
           { label: "Volunteer", href: "/volunteer", intent: "secondary" },
         ]}
         subtitle="Bannerly pairs small nonprofits with volunteer designers and marketers to create social media and web content that reaches the people they serve, at no cost."
-        tag="Free marketing for small nonprofits"
+        tag="Free digital marketing and social media posts for nonprofits"
         title="Every cause deserves a banner"
       />
       <Steps
@@ -67,12 +68,12 @@ function HomePage() {
           {
             title: "Get matched",
             description:
-              "We pair you with a volunteer creator who drafts your posts, and a team lead reviews every one.",
+              "We pair you with a qualified volunteer who designs your content and posts, while a team lead reviews every one.",
           },
           {
             title: "Approve and publish",
             description:
-              "You approve the posts and publish them, or give us scheduling access. We check in monthly on what worked.",
+              "You approve the posts and publish them, or give us collaborator access. We check in periodically on the engagement and traction.",
           },
         ]}
         subtitle="Three steps from application to posts your audience sees."
@@ -80,26 +81,19 @@ function HomePage() {
         title="Marketing help without the marketing budget"
       />
       <Stats note={pilotNote} stats={pilotStats} tag="Impact" title="Our pilot at a glance" />
-      <PostTiles
-        actions={[{ label: "See our work", href: "/our-work", intent: "secondary" }]}
-        subtitle="Example post formats. Real client posts appear on Our Work as the pilot wraps up."
+      <InstagramFeed
+        handle="bannerlyorg"
+        posts={["DdZ1W9MiSPb", "DcgqF54Rh--", "DcMb0lAJzs_"]}
+        subtitle="Our latest posts on Instagram."
         tag="What we make"
-        tiles={[
-          { kind: "Event promo", headline: "Join us Saturday at the community garden" },
-          { kind: "Fundraiser", headline: "3 days left to reach our goal" },
-          { kind: "Giving Tuesday", headline: "Your gift goes twice as far today" },
-          { kind: "Volunteer spotlight", headline: "Meet the people behind our Saturday meals" },
-          { kind: "Impact story", headline: "What one year of tutoring changed" },
-          { kind: "Brand kit", headline: "Templates in your colors, ready to reuse" },
-        ]}
-        title="Posts that help causes get seen"
+        title="Content that helps causes get seen"
       />
       <Callout
         actions={[
           { label: "Get free marketing help", href: "/for-nonprofits#apply" },
           { label: "Volunteer your skills", href: "/volunteer#sign-up" },
         ]}
-        subtitle="Nonprofits get content that reaches people. Creatives get real experience."
+        subtitle="Nonprofits get content that reaches people. Creatives get real volunteer experience."
         title="Two ways to raise a banner"
       />
     </>
@@ -219,7 +213,7 @@ function ForNonprofitsPage() {
           {
             title: "Approve and publish",
             description:
-              "You approve the posts and publish them, or give our team scheduling access.",
+              "You approve the posts and publish them, or give our team collaborator access.",
           },
           {
             title: "Learn and improve",
@@ -244,7 +238,7 @@ function ForNonprofitsPage() {
           {
             question: "Who publishes them?",
             answer:
-              "You do. You approve each post and publish it yourself, or give our team scheduling access.",
+              "You do. You approve each post and publish it yourself, or give our team collaborator access.",
           },
           {
             question: "What do you need from us?",
@@ -532,6 +526,33 @@ function AboutPage() {
         tag="Our story"
         title="Why Bannerly exists"
       />
+      <Founder
+        extracurriculars={[
+          "Cadet First Lieutenant in the Civil Air Patrol; completed New Jersey Wing Basic Encampment in 2025",
+          "UPenn National Student Leadership Conference, Summer Engineering Program",
+          "Johnson & Johnson Technology Awareness Program",
+          "Future Business Leaders of America (FBLA): first place in the Business Blast website design challenge (2024) and Shark Tank pitch (2023), and a top-five regional finish that advanced to states (2025)",
+          "AAU basketball with Iron Peak, plus digital music production and DJing",
+        ]}
+        intro={[
+          "Ronav Gopal is a sophomore at Hillsborough High School in New Jersey and the founder of Bannerly. He's building the technical and business leadership skills to help other people succeed, with an eye on a career in aeronautics or business marketing.",
+          "Bannerly grew out of his own volunteer work: designing websites and digital content for nonprofits showed him how much good marketing helps a cause get seen.",
+        ]}
+        name="Ronav Gopal"
+        role="Founder"
+        title="About the Founder"
+        volunteering={[
+          {
+            text: "Designed and built a modern website for the Steps Together nonprofit",
+            href: "https://www.steps-together.org/",
+            linkLabel: "steps-together.org",
+          },
+          { text: "Created digital content for the Somerset Food Bank" },
+          { text: "Raised over $500 for Special Olympics New Jersey community events" },
+          { text: "Volunteered at the Special Olympics New Jersey Summer Games over two days" },
+          { text: "Volunteers with Hillsborough's Interact Club" },
+        ]}
+      />
       <IconGrid
         items={[
           {
@@ -542,7 +563,8 @@ function AboutPage() {
           {
             icon: <StarIcon className={icon} />,
             title: "Quality on every post",
-            description: "A core team lead checks every post before it goes out.",
+            description:
+              "A core team lead checks and verifies every post with the nonprofit before it goes out.",
           },
           {
             icon: <PersonIcon className={icon} />,
@@ -559,11 +581,11 @@ function AboutPage() {
           {
             label: "Board",
             people: [
-              { name: "Lisa", role: "Board member" },
-              { name: "Courtney", role: "Board member" },
-              { name: "Justin", role: "Board member" },
-              { name: "Akshitha", role: "Board member" },
-              { name: "Vandana", role: "Board member" },
+              { name: "To be announced", role: "Board member" },
+              { name: "To be announced", role: "Board member" },
+              { name: "To be announced", role: "Board member" },
+              { name: "To be announced", role: "Board member" },
+              { name: "To be announced", role: "Board member" },
             ],
           },
         ]}
