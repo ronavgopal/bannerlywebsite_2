@@ -4,7 +4,8 @@
  * Writes to the "Bannerly Form Responses" spreadsheet and is deployed as a web app.
  * The website (src/bannerly/actions.ts) posts each form submission here as JSON:
  *   { form: "<form kind>", submittedAt: "<ISO date>", fields: { ... } }
- * Each form gets its own tab with a formatted header row.
+ * Each form gets its own tab with a formatted header row. Nonprofit applications
+ * and volunteer sign-ups also get a confirmation email (see EMAILS below).
  *
  * Setup: run setup() once, deploy as a web app (Execute as: Me,
  * Who has access: Anyone), then set FORMS_WEBHOOK_URL in Vercel to the
@@ -78,6 +79,7 @@ function doPost(e) {
       return safe_(fields[id]);
     });
     sheet_(form).appendRow(row);
+    sendConfirmation_(data.form, fields);
     return json_({ ok: true });
   } finally {
     lock.releaseLock();
@@ -115,6 +117,87 @@ function sheet_(form) {
     .setWrap(true)
     .setVerticalAlignment("top");
   return sheet;
+}
+
+/**
+ * Confirmation emails, sent from the account that deployed this script.
+ * Each template is a subject plus paragraphs; a paragraph that is an array
+ * becomes a numbered list.
+ */
+const EMAILS = {
+  "nonprofit-application": (f) => ({
+    subject: "Welcome to Bannerly – We received your application!",
+    paragraphs: [
+      `Hi ${f.name},`,
+      `Thank you for applying to Bannerly! We’re excited that ${f.organization} is interested in free digital marketing support.`,
+      "Here’s what happens next:",
+      [
+        "Our team will review your application within 2–3 business days.",
+        "If it’s a good fit, we’ll match you with a volunteer creator.",
+        "You’ll receive a kickoff email with next steps and a shared folder for your brand assets.",
+      ],
+      "In the meantime, feel free to reply to this email with any questions or additional brand materials (logo, colors, fonts, or current social links).",
+      "Every cause deserves a banner — we’re glad you’re raising yours with us.",
+    ],
+  }),
+  "volunteer-signup": (f) => ({
+    subject: "Welcome to Bannerly – Thanks for signing up to volunteer!",
+    paragraphs: [
+      `Hi ${f.name},`,
+      "Thank you for joining Bannerly! We’re excited to connect your design and marketing skills with small nonprofits that need free content support.",
+      "Here’s what happens next:",
+      [
+        "We’ll review your profile and skills.",
+        "You’ll receive an onboarding pack with templates, guidelines, and how to log hours.",
+        "We’ll match you with a nonprofit based on your skills and availability.",
+      ],
+      "In the meantime, make sure your portfolio or sample work is up to date (reply with a link if you haven’t shared one yet).",
+      "You’ll earn real portfolio pieces, service hours, and the chance for LinkedIn recommendations. Welcome aboard!",
+    ],
+  }),
+};
+
+const SIGN_OFF = ["Best regards,", "The Bannerly Team", "bannerly.org | @bannerlyorg"];
+
+function sendConfirmation_(kind, fields) {
+  const template = EMAILS[kind];
+  if (!template || !fields.email) return;
+  const f = {
+    name: String(fields.name || "there").trim(),
+    organization: String(fields.organization || "your organization").trim(),
+  };
+  const { subject, paragraphs } = template(f);
+
+  const text = paragraphs
+    .map((p) => (Array.isArray(p) ? p.map((item, i) => `${i + 1}. ${item}`).join("\n") : p))
+    .concat(SIGN_OFF.join("\n"))
+    .join("\n\n");
+
+  const html = `<div style="font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:1.6;color:#2b1a1b;max-width:560px">${paragraphs
+    .map((p) =>
+      Array.isArray(p)
+        ? `<ol style="margin:0 0 16px;padding-left:22px">${p.map((item) => `<li>${esc_(item)}</li>`).join("")}</ol>`
+        : `<p style="margin:0 0 16px">${esc_(p)}</p>`,
+    )
+    .join("")}<p style="margin:24px 0 0">${SIGN_OFF.map(esc_).join("<br>")}</p></div>`;
+
+  try {
+    MailApp.sendEmail({ to: String(fields.email).trim(), subject, body: text, htmlBody: html, name: "Bannerly" });
+  } catch (err) {
+    // The response is already saved in the sheet; a failed email shouldn't fail the form.
+    console.error("Confirmation email failed: " + err);
+  }
+}
+
+function esc_(text) {
+  return String(text).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
+}
+
+/** Sends both confirmation emails to you so you can check how they look. Run from the editor. */
+function testEmails() {
+  const me = Session.getEffectiveUser().getEmail();
+  sendConfirmation_("nonprofit-application", { name: "Test Contact", organization: "Test Nonprofit", email: me });
+  sendConfirmation_("volunteer-signup", { name: "Test Volunteer", email: me });
 }
 
 /** Stops submitted text from being read as a spreadsheet formula. */
