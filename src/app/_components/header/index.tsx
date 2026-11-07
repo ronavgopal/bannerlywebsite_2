@@ -1,100 +1,72 @@
+import { HorizontalLogo } from "@/bannerly/logo";
 import { ButtonLink } from "@/common/button";
-import { Pump } from "basehub/react-pump";
-import { buttonFragment } from "@/lib/basehub/fragments";
-import { fragmentOn } from "basehub";
+import type { fragmentOn } from "basehub";
+import type { buttonFragment } from "@/lib/basehub/fragments";
+import { navLinks } from "@/bannerly/config";
 
 import { DesktopMenu, MobileMenu } from "./navigation-menu";
-import { DarkLightImageAutoscale } from "@/common/dark-light-image";
 
-const headerLinksFragment = fragmentOn("HeaderNavbarLinkComponent", {
-  _title: true,
-  href: true,
-  _id: true,
+/* The menu components were built for BaseHub data; Bannerly passes the same shape from code. */
+export type HeaderLiksFragment = {
+  _id: string;
+  _title: string;
+  href: string | null;
   sublinks: {
     items: {
-      _id: true,
-      _title: true,
-      link: {
-        __typename: true,
-        on_CustomTextComponent: {
-          text: true,
-        },
-        on_PageReferenceComponent: {
-          page: {
-            pathname: true,
-            _title: true,
-          },
-        },
-      },
-    },
-  },
-});
+      _id: string;
+      _title: string;
+      link:
+        | { __typename: "CustomTextComponent"; text: string }
+        | { __typename: "PageReferenceComponent"; page: { pathname: string; _title: string } };
+    }[];
+  };
+};
 
-export type HeaderLiksFragment = fragmentOn.infer<typeof headerLinksFragment>;
+export type HeaderFragment = {
+  navbar: { items: HeaderLiksFragment[] };
+  rightCtas: { items: fragmentOn.infer<typeof buttonFragment>[] };
+};
 
-export const headerFragment = fragmentOn("Header", {
+const header = {
   navbar: {
-    items: headerLinksFragment,
+    items: navLinks.map((link) => ({
+      _id: link.href,
+      _title: link.label,
+      href: link.href,
+      sublinks: { items: [] },
+    })),
   },
   rightCtas: {
-    items: buttonFragment,
+    items: [
+      { _id: "donate", label: "Donate", href: "/donate", type: "secondary", icon: null },
+      {
+        _id: "apply",
+        label: "Get Free Help",
+        href: "/for-nonprofits#apply",
+        type: "primary",
+        icon: null,
+      },
+    ],
   },
-});
+} as HeaderFragment;
 
-export type HeaderFragment = fragmentOn.infer<typeof headerFragment>;
-
-export async function Header() {
+export function Header() {
   return (
-    <Pump
-      queries={[
-        {
-          site: {
-            header: headerFragment,
-            settings: {
-              logo: {
-                dark: {
-                  url: true,
-                  alt: true,
-                  width: true,
-                  height: true,
-                  aspectRatio: true,
-                  blurDataURL: true,
-                },
-                light: {
-                  url: true,
-                  alt: true,
-                  width: true,
-                  height: true,
-                  aspectRatio: true,
-                  blurDataURL: true,
-                },
-              },
-            },
-          },
-        },
-      ]}
-    >
-      {async ([
-        {
-          site: { header, settings },
-        },
-      ]) => {
-        "use server";
-
-        return (
-          <header className="sticky left-0 top-0 z-100 flex w-full flex-col border-b border-border bg-surface-primary dark:border-dark-border dark:bg-dark-surface-primary">
-            <div className="flex h-(--header-height) bg-surface-primary dark:bg-dark-surface-primary">
-              <div className="container mx-auto grid w-full grid-cols-header place-items-center content-center items-center px-6 *:first:justify-self-start">
-                <ButtonLink unstyled className="flex items-center ring-offset-2" href="/">
-                  <DarkLightImageAutoscale priority {...settings.logo} />
-                </ButtonLink>
-                <DesktopMenu {...header} />
-                <MobileMenu {...header} />
-              </div>
-            </div>
-          </header>
-        );
-      }}
-    </Pump>
+    <header className="border-border bg-surface-primary sticky top-0 left-0 z-100 flex w-full flex-col border-b">
+      <div className="bg-surface-primary flex h-(--header-height)">
+        <div className="grid-cols-header container mx-auto grid w-full place-items-center content-center items-center px-6 *:first:justify-self-start">
+          <ButtonLink
+            unstyled
+            aria-label="Bannerly home"
+            className="flex items-center ring-offset-2"
+            href="/"
+          >
+            <HorizontalLogo className="text-accent-500 h-8 w-auto" />
+          </ButtonLink>
+          <DesktopMenu {...header} />
+          <MobileMenu {...header} />
+        </div>
+      </div>
+    </header>
   );
 }

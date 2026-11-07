@@ -60,3 +60,52 @@
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
+
+/* Bannerly brand: cream surfaces and maroon accent, sampled from the logo */
+:root {
+  --accent-50: #FBF4F3;
+  --accent-rgb-50: 251, 244, 243;
+  --accent-100: #F5E3E2;
+  --accent-rgb-100: 245, 227, 226;
+  --accent-200: #EAC3C2;
+  --accent-rgb-200: 234, 195, 194;
+  --accent-300: #D8918F;
+  --accent-rgb-300: 216, 145, 143;
+  --accent-400: #B04F52;
+  --accent-rgb-400: 176, 79, 82;
+  --accent-500: #74151C;
+  --accent-rgb-500: 116, 21, 28;
+  --accent-600: #5E1016;
+  --accent-rgb-600: 94, 16, 22;
+  --accent-700: #4B0D12;
+  --accent-rgb-700: 75, 13, 18;
+  --accent-800: #3A0A0E;
+  --accent-rgb-800: 58, 10, 14;
+  --accent-900: #2A070A;
+  --accent-rgb-900: 42, 7, 10;
+  --accent-950: #1A0406;
+  --accent-rgb-950: 26, 4, 6;
+  --grayscale-50: #F4EEDA;
+  --grayscale-rgb-50: 244, 238, 218;
+  --grayscale-100: #EDE5CC;
+  --grayscale-rgb-100: 237, 229, 204;
+  --grayscale-200: #E3D9BC;
+  --grayscale-rgb-200: 227, 217, 188;
+  --grayscale-300: #D2C6A5;
+  --grayscale-rgb-300: 210, 198, 165;
+  --grayscale-400: #A69B80;
+  --grayscale-rgb-400: 166, 155, 128;
+  --grayscale-500: #6F6550;
+  --grayscale-rgb-500: 111, 101, 80;
+  --grayscale-600: #564D3E;
+  --grayscale-rgb-600: 86, 77, 62;
+  --grayscale-700: #423B30;
+  --grayscale-rgb-700: 66, 59, 48;
+  --grayscale-800: #2E2921;
+  --grayscale-rgb-800: 46, 41, 33;
+  --grayscale-900: #211D17;
+  --grayscale-rgb-900: 33, 29, 23;
+  --grayscale-950: #1B1411;
+  --grayscale-rgb-950: 27, 20, 17;
+  --text-on-accent: #F4EEDA;
+}
