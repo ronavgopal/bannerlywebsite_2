@@ -1,4 +1,5 @@
 import clsx from "clsx";
+import Image, { type StaticImageData } from "next/image";
 import { CheckIcon } from "@radix-ui/react-icons";
 
 import { ButtonLink } from "@/common/button";
@@ -425,7 +426,10 @@ export function Team({
   tag?: string;
   title: string;
   subtitle?: string;
-  groups: { label: string; people: { name: string; role: string }[] }[];
+  groups: {
+    label: string;
+    people: { name: string; role: string; photo?: StaticImageData }[];
+  }[];
 }) {
   return (
     <Section>
@@ -444,16 +448,26 @@ export function Team({
                   key={`${person.name}-${i}`}
                   className="border-border flex w-[170px] flex-col items-center gap-3 rounded-lg border p-5 text-center"
                 >
-                  <span
-                    aria-hidden
-                    className="bg-accent-100 text-accent-600 flex size-14 items-center justify-center rounded-full text-xl font-medium"
-                  >
-                    {person.name === "To be announced" ? (
-                      <FlagMark className="size-6 opacity-60" />
-                    ) : (
-                      person.name.charAt(0)
-                    )}
-                  </span>
+                  {person.photo ? (
+                    <Image
+                      alt={person.name}
+                      className="size-14 rounded-full object-cover"
+                      placeholder="blur"
+                      sizes="56px"
+                      src={person.photo}
+                    />
+                  ) : (
+                    <span
+                      aria-hidden
+                      className="bg-accent-100 text-accent-600 flex size-14 items-center justify-center rounded-full text-xl font-medium"
+                    >
+                      {person.name === "To be announced" ? (
+                        <FlagMark className="size-6 opacity-60" />
+                      ) : (
+                        person.name.charAt(0)
+                      )}
+                    </span>
+                  )}
                   <div className="flex flex-col">
                     <p className="font-medium">{person.name}</p>
                     <p className="text-text-tertiary text-sm">{person.role}</p>
@@ -680,10 +694,12 @@ export function Founder({
   intro,
   volunteering,
   extracurriculars,
+  photo,
 }: {
   title: string;
   name: string;
   role: string;
+  photo?: StaticImageData;
   intro: string[];
   volunteering: { text: string; href?: string; linkLabel?: string }[];
   extracurriculars: string[];
@@ -695,12 +711,22 @@ export function Founder({
           <p className="text-accent-500 text-sm font-medium">{role}</p>
           <h2 className="text-3xl font-medium tracking-tighter md:text-4xl">{title}</h2>
           <div className="flex items-center gap-3">
-            <span
-              aria-hidden
-              className="bg-accent-500 text-text-on-accent-primary flex size-12 items-center justify-center rounded-full text-lg font-medium"
-            >
-              {name.charAt(0)}
-            </span>
+            {photo ? (
+              <Image
+                alt={name}
+                className="size-16 rounded-full object-cover"
+                placeholder="blur"
+                sizes="64px"
+                src={photo}
+              />
+            ) : (
+              <span
+                aria-hidden
+                className="bg-accent-500 text-text-on-accent-primary flex size-12 items-center justify-center rounded-full text-lg font-medium"
+              >
+                {name.charAt(0)}
+              </span>
+            )}
             <p className="text-lg font-medium">{name}</p>
           </div>
           {intro.map((p) => (

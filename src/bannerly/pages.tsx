@@ -12,6 +12,7 @@ import {
   StarIcon,
 } from "@radix-ui/react-icons";
 
+import ronavPhoto from "./ronav.jpg";
 import { donateHref } from "./config";
 import {
   Callout,
@@ -539,6 +540,7 @@ function AboutPage() {
           "Bannerly grew out of his own volunteer work: designing websites and digital content for nonprofits showed him how much good marketing helps a cause get seen.",
         ]}
         name="Ronav Gopal"
+        photo={ronavPhoto}
         role="Founder"
         title="About the Founder"
         volunteering={[
@@ -577,7 +579,7 @@ function AboutPage() {
       />
       <Team
         groups={[
-          { label: "Founder", people: [{ name: "Ronav", role: "Founder" }] },
+          { label: "Founder", people: [{ name: "Ronav", role: "Founder", photo: ronavPhoto }] },
           {
             label: "Board",
             people: [

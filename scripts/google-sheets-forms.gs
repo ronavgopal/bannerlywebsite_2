@@ -182,7 +182,14 @@ function sendConfirmation_(kind, fields) {
     .join("")}<p style="margin:24px 0 0">${SIGN_OFF.map(esc_).join("<br>")}</p></div>`;
 
   try {
-    MailApp.sendEmail({ to: String(fields.email).trim(), subject, body: text, htmlBody: html, name: "Bannerly" });
+    MailApp.sendEmail({
+      to: String(fields.email).trim(),
+      cc: Session.getEffectiveUser().getEmail(), // a copy for the Bannerly inbox
+      subject,
+      body: text,
+      htmlBody: html,
+      name: "Bannerly",
+    });
   } catch (err) {
     // The response is already saved in the sheet; a failed email shouldn't fail the form.
     console.error("Confirmation email failed: " + err);
