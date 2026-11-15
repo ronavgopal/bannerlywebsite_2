@@ -23,6 +23,7 @@ const FORMS = {
       ["organization", "Organization"],
       ["name", "Contact name"],
       ["email", "Email"],
+      ["phone", "Phone"],
       ["website", "Website / social"],
       ["mission", "Mission"],
       ["audience", "Audience"],
@@ -97,17 +98,14 @@ function setup() {
 function sheet_(form) {
   const ss = SpreadsheetApp.openById(SHEET_ID);
   let sheet = ss.getSheetByName(form.tab);
-  if (sheet) return sheet;
+  if (sheet) {
+    addMissingColumns_(sheet, form);
+    return sheet;
+  }
 
   sheet = ss.insertSheet(form.tab);
   const headers = form.columns.map(([, label]) => label);
-  sheet
-    .getRange(1, 1, 1, headers.length)
-    .setValues([headers])
-    .setFontWeight("bold")
-    .setBackground("#74151C")
-    .setFontColor("#F4EEDA")
-    .setVerticalAlignment("middle");
+  styleHeader_(sheet.getRange(1, 1, 1, headers.length).setValues([headers]));
   sheet.setFrozenRows(1);
   sheet.setRowHeight(1, 32);
   sheet.setColumnWidths(1, headers.length, 200);
@@ -117,6 +115,34 @@ function sheet_(form) {
     .setWrap(true)
     .setVerticalAlignment("top");
   return sheet;
+}
+
+/**
+ * When a field is added to a form, inserts its column into the existing tab
+ * next to the field before it, so older rows keep lining up.
+ */
+function addMissingColumns_(sheet, form) {
+  const labels = form.columns.map(([, label]) => label);
+  const width = Math.max(sheet.getLastColumn(), 1);
+  const current = sheet.getRange(1, 1, 1, width).getValues()[0].map(String);
+  labels.forEach((label, i) => {
+    if (current.includes(label)) return;
+    const after = i === 0 ? 0 : current.indexOf(labels[i - 1]) + 1;
+    if (after === 0) sheet.insertColumnBefore(1);
+    else sheet.insertColumnAfter(after);
+    const col = after + 1;
+    styleHeader_(sheet.getRange(1, col).setValue(label));
+    sheet.setColumnWidth(col, 200);
+    current.splice(col - 1, 0, label);
+  });
+}
+
+function styleHeader_(range) {
+  range
+    .setFontWeight("bold")
+    .setBackground("#74151C")
+    .setFontColor("#F4EEDA")
+    .setVerticalAlignment("middle");
 }
 
 /**

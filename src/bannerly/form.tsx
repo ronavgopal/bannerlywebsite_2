@@ -12,7 +12,7 @@ import { submitForm, type FormKind, type FormState } from "./actions";
 
 export type Field =
   | {
-      type: "text" | "email" | "url";
+      type: "text" | "email" | "url" | "tel";
       name: string;
       label: string;
       required?: boolean;

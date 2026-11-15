@@ -253,6 +253,7 @@ function ForNonprofitsPage() {
           { type: "text", name: "organization", label: "Organization name", required: true },
           { type: "text", name: "name", label: "Your name", required: true },
           { type: "email", name: "email", label: "Email", required: true },
+          { type: "tel", name: "phone", label: "Phone number", placeholder: "(555) 123-4567" },
           {
             type: "url",
             name: "website",
