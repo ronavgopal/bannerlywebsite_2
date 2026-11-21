@@ -12,7 +12,9 @@ import {
   StarIcon,
 } from "@radix-ui/react-icons";
 
+import justinPhoto from "./justin.jpg";
 import ronavPhoto from "./ronav.jpg";
+import vandanaPhoto from "./vandana.jpg";
 import { donateHref } from "./config";
 import {
   Callout,
@@ -528,6 +530,20 @@ function AboutPage() {
         tag="Our story"
         title="Why Bannerly exists"
       />
+      <Team
+        groups={[
+          { label: "Founder", people: [{ name: "Ronav", role: "Founder", photo: ronavPhoto }] },
+          {
+            label: "Mentors",
+            people: [
+              { name: "Justin Benjamin", role: "Mentor", photo: justinPhoto },
+              { name: "Vandana Rajendrakumar", role: "Mentor", photo: vandanaPhoto },
+            ],
+          },
+        ]}
+        tag="Our team"
+        title="The people behind Bannerly"
+      />
       <Founder
         extracurriculars={[
           "Cadet First Lieutenant in the Civil Air Patrol; completed New Jersey Wing Basic Encampment in 2025",
@@ -556,6 +572,67 @@ function AboutPage() {
           { text: "Volunteers with Hillsborough's Interact Club" },
         ]}
       />
+      <Founder
+        extracurriculars={[
+          "B.S. in Learning and Organizational Change, Northwestern University (2023)",
+          "Big Ten and Division I wrestler at Northwestern",
+          "Entrepreneurship program at Draper University (2024)",
+          "Four-time Team USA Beach Wrestling World Team member, with gold and silver at the Beach Wrestling World Series and a Pan American silver",
+          "Senior Regional Training Center athlete with the Tar Heel Wrestling Club at UNC Chapel Hill",
+        ]}
+        intro={[
+          "Justin Benjamin is the CEO of Normal, an app that makes saving and investing in crypto simple, and a co-founder of Bloom Team, a creative studio that builds websites, brands and marketing for growing businesses.",
+          "He has competed for Team USA in more than 13 countries and mentors high school students as they turn their passions into real-world projects.",
+        ]}
+        leftTitle="Experience"
+        name="Justin Benjamin"
+        photo={justinPhoto}
+        rightTitle="Education and athletics"
+        role="Mentor"
+        title="About the Mentor"
+        volunteering={[
+          {
+            text: "CEO of Normal, which he joined in 2022 as Head of Strategy before serving as co-founder and COO",
+          },
+          {
+            text: "Co-founder of Bloom Team, a studio for custom websites, branding, animation and ads",
+            href: "https://bloomteam.io",
+            linkLabel: "bloomteam.io",
+          },
+          {
+            text: "Mentor at Curious Cardinals, guiding high school students through passion projects",
+          },
+          { text: "Founder of DeFi United, a decentralized finance research group" },
+          { text: "Business development at CoinFlip and a development internship at U.S. Venture" },
+        ]}
+      />
+      <Founder
+        extracurriculars={[
+          "Master's in Industrial Design, Rhode Island School of Design (in progress)",
+          "BA (Hons) Product Design, Nottingham Trent University (2025)",
+          "Advanced Diploma in Product Design, Pearl Academy, Delhi",
+          "Winner of India's Best Design Student Award (2024)",
+          "Her Nayan Lamp was featured on Yanko Design, and her project Auzm was exhibited at the Tallinn Design Festival (2026)",
+        ]}
+        intro={[
+          "Vandana Rajendrakumar is an industrial designer studying for her Master of Industrial Design at the Rhode Island School of Design. Her work blends culture, craft and inclusive design.",
+          "She brings Bannerly a designer's eye for research, craft and visual storytelling, built through studies and work in India, the UK and the US.",
+        ]}
+        leftTitle="Experience"
+        name="Vandana Rajendrakumar"
+        photo={vandanaPhoto}
+        rightTitle="Education and recognition"
+        role="Mentor"
+        title="About the Mentor"
+        volunteering={[
+          {
+            text: "Graduate Teaching Assistant, IDSA Public Relations Lead and Cultural Liaison at RISD",
+          },
+          { text: "Industrial Design Intern at Kohler Co." },
+          { text: "Invited curriculum reviewer and guest speaker at Pearl Academy" },
+          { text: "Student Ambassador at Nottingham Trent University" },
+        ]}
+      />
       <IconGrid
         items={[
           {
@@ -577,23 +654,6 @@ function AboutPage() {
         ]}
         tag="How we work"
         title="What we stand for"
-      />
-      <Team
-        groups={[
-          { label: "Founder", people: [{ name: "Ronav", role: "Founder", photo: ronavPhoto }] },
-          {
-            label: "Board",
-            people: [
-              { name: "To be announced", role: "Board member" },
-              { name: "To be announced", role: "Board member" },
-              { name: "To be announced", role: "Board member" },
-              { name: "To be announced", role: "Board member" },
-              { name: "To be announced", role: "Board member" },
-            ],
-          },
-        ]}
-        tag="Our team"
-        title="The people behind Bannerly"
       />
       <Stats note={pilotNote} stats={pilotStats} tag="Impact" title="Our pilot at a glance" />
     </>

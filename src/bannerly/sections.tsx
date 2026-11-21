@@ -695,11 +695,15 @@ export function Founder({
   volunteering,
   extracurriculars,
   photo,
+  leftTitle = "Volunteering",
+  rightTitle = "Extracurriculars",
 }: {
   title: string;
   name: string;
   role: string;
   photo?: StaticImageData;
+  leftTitle?: string;
+  rightTitle?: string;
   intro: string[];
   volunteering: { text: string; href?: string; linkLabel?: string }[];
   extracurriculars: string[];
@@ -737,7 +741,7 @@ export function Founder({
         </div>
         <div className="grid flex-1 gap-5 md:grid-cols-2">
           <div className="border-border bg-surface-primary flex flex-col gap-4 rounded-lg border p-5">
-            <h3 className="text-lg font-medium">Volunteering</h3>
+            <h3 className="text-lg font-medium">{leftTitle}</h3>
             <ul className="flex flex-col gap-3">
               {volunteering.map((item) => (
                 <li key={item.text} className="text-text-secondary flex items-start gap-3">
@@ -765,7 +769,7 @@ export function Founder({
             </ul>
           </div>
           <div className="border-border bg-surface-primary flex flex-col gap-4 rounded-lg border p-5">
-            <h3 className="text-lg font-medium">Extracurriculars</h3>
+            <h3 className="text-lg font-medium">{rightTitle}</h3>
             <ul className="flex flex-col gap-3">
               {extracurriculars.map((item) => (
                 <li key={item} className="text-text-secondary flex items-start gap-3">
