@@ -616,59 +616,6 @@ function DonatePage() {
         tag="Donate / Partner"
         title="Help every cause get its banner"
       />
-      <Packages
-        id="give"
-        items={[
-          {
-            name: "Monthly giving",
-            price: "Monthly",
-            billed: "For individuals",
-            badge: "Most impact",
-            features: [
-              "Steady support for ongoing client work",
-              "Covers the tools our volunteers use",
-              "Cancel anytime",
-            ],
-            cta: { label: "Give monthly", href: donateHref },
-          },
-          {
-            name: "Annual campaign",
-            price: "Once",
-            billed: "For individuals",
-            features: [
-              "Join our yearly fundraising campaign",
-              "Any amount helps a nonprofit get seen",
-              "One gift, no commitment",
-            ],
-            cta: { label: "Give once", href: donateHref },
-          },
-          {
-            name: "Sponsor a nonprofit",
-            price: "1 year",
-            billed: "For local businesses",
-            features: [
-              "Fund one nonprofit's content for a year",
-              "Get recognized for your support",
-              "Show your community you care",
-            ],
-            cta: { label: "Become a sponsor", href: "#partner" },
-          },
-          {
-            name: "In-kind",
-            price: "Tools",
-            billed: "For companies",
-            features: [
-              "Donate software licenses",
-              "Programs like TechSoup make it easy",
-              "Equip volunteers with pro tools",
-            ],
-            cta: { label: "Offer tools", href: "#partner" },
-          },
-        ]}
-        subtitle="Choose how you'd like to support free marketing for nonprofits."
-        tag="Ways to give"
-        title="Every gift raises a banner"
-      />
       <IconGrid
         items={[
           {

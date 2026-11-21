@@ -34,5 +34,9 @@ export const navLinks = [
   { label: "Blog", href: "/blog" },
 ];
 
-/** Where "Donate" buttons go: the donation platform if configured, else the sponsor form. */
-export const donateHref = site.donateUrl || "/donate#give";
+/** Our GoFundMe campaign. */
+export const GOFUNDME_URL =
+  "https://www.gofundme.com/f/bannerlyorg-support-student-volunteers-helping-nonprofits";
+
+/** Where the Donate button on the Donate page goes (NEXT_PUBLIC_DONATE_URL overrides it). */
+export const donateHref = site.donateUrl || GOFUNDME_URL;
