@@ -10,7 +10,7 @@ export const site = {
   name: "Bannerly",
   tagline: "Every cause deserves a banner",
   description:
-    "Bannerly pairs small nonprofits with volunteer designers and marketers to create free social media and web content that reaches the people they serve.",
+    "Bannerly pairs small nonprofits with student volunteer designers and marketers to create free social media and web content that reaches the people they serve.",
   contactEmail: process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "",
   /** Link to the donation page on Zeffy, Givebutter or Stripe. */
   donateUrl: process.env.NEXT_PUBLIC_DONATE_URL ?? "",

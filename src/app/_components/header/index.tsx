@@ -2,7 +2,7 @@ import { HorizontalLogo } from "@/bannerly/logo";
 import { ButtonLink } from "@/common/button";
 import type { fragmentOn } from "basehub";
 import type { buttonFragment } from "@/lib/basehub/fragments";
-import { navLinks } from "@/bannerly/config";
+import { GOFUNDME_URL, navLinks } from "@/bannerly/config";
 
 import { DesktopMenu, MobileMenu } from "./navigation-menu";
 
@@ -38,7 +38,7 @@ const header = {
   },
   rightCtas: {
     items: [
-      { _id: "donate", label: "Donate", href: "/donate", type: "secondary", icon: null },
+      { _id: "donate", label: "Donate", href: GOFUNDME_URL, type: "secondary", icon: null },
       {
         _id: "apply",
         label: "Get Free Help",

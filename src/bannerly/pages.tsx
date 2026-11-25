@@ -43,7 +43,7 @@ const pilotStats = [
 ];
 
 const pilotNote =
-  "As the pilot runs, we'll report nonprofits served, posts created, engagement growth and volunteer hours here.";
+  "As the pilot runs, we'll report nonprofits served, posts created, engagement growth and student volunteer hours here.";
 
 /* -------------------------------------------------------------------------- */
 /*                                    Home                                    */
@@ -57,7 +57,7 @@ function HomePage() {
           { label: "Get Volunteer Marketing", href: "/for-nonprofits" },
           { label: "Volunteer", href: "/volunteer", intent: "secondary" },
         ]}
-        subtitle="Bannerly pairs small nonprofits with volunteer designers and marketers to create social media and web content that reaches the people they serve, at no cost."
+        subtitle="Bannerly pairs small nonprofits with student volunteer designers and marketers to create social media and web content that reaches the people they serve, at no cost."
         tag="Free digital marketing and social media posts for nonprofits"
         title="Every cause deserves a banner"
       />
@@ -71,7 +71,7 @@ function HomePage() {
           {
             title: "Get matched",
             description:
-              "We pair you with a qualified volunteer who designs your content and posts, while a team lead reviews every one.",
+              "We pair you with a qualified student volunteer who designs your content and posts, while a team lead reviews every one.",
           },
           {
             title: "Approve and publish",
@@ -96,7 +96,7 @@ function HomePage() {
           { label: "Get free marketing help", href: "/for-nonprofits#apply" },
           { label: "Volunteer your skills", href: "/volunteer#sign-up" },
         ]}
-        subtitle="Nonprofits get content that reaches people. Creatives get real volunteer experience."
+        subtitle="Nonprofits get content that reaches people. Student volunteers get real-world experience."
         title="Two ways to raise a banner"
       />
     </>
@@ -116,7 +116,7 @@ function ForNonprofitsPage() {
           { label: "Apply now", href: "#apply" },
           { label: "See packages", href: "#packages", intent: "secondary" },
         ]}
-        subtitle="Get social media and web content made by volunteer creators and reviewed by our team, so you can reach your audience without a marketing budget."
+        subtitle="Get social media and web content made by student volunteers and reviewed by our team, so you can reach your audience without a marketing budget."
         tag="For nonprofits"
         title="Free marketing for small nonprofits"
       />
@@ -203,7 +203,7 @@ function ForNonprofitsPage() {
           },
           {
             title: "Meet your creator",
-            description: "We match you with a volunteer creator who fits your needs.",
+            description: "We match you with a student volunteer who fits your needs.",
           },
           {
             title: "Get drafts",
@@ -236,7 +236,7 @@ function ForNonprofitsPage() {
           {
             question: "Who creates the posts?",
             answer:
-              "Volunteer creators: design and marketing students, freelancers and retirees. A team lead reviews every post.",
+              "Student volunteers studying design and marketing. A team lead reviews every post.",
           },
           {
             question: "Who publishes them?",
@@ -313,7 +313,7 @@ function VolunteerPage() {
           { label: "How it works", href: "#how-it-works", intent: "secondary" },
         ]}
         subtitle="Create real marketing for small nonprofits. Earn portfolio pieces, service hours and LinkedIn recommendations while you help a cause get seen."
-        tag="For creatives"
+        tag="For students"
         title="Build your portfolio with causes that matter"
       />
       <IconGrid
@@ -345,21 +345,21 @@ function VolunteerPage() {
       <Checklist
         items={[
           {
-            title: "Design and marketing students",
+            title: "Design students",
             description: "Put your coursework into practice for a real client.",
           },
           {
-            title: "Freelancers between gigs",
-            description: "Keep your skills sharp and your portfolio current.",
+            title: "Marketing students",
+            description: "Plan and write posts that reach real audiences.",
           },
           {
-            title: "Retirees",
-            description: "Share years of experience with causes that need it.",
+            title: "Student creators",
+            description: "Self-taught in Canva, video or photography? You're welcome too.",
           },
         ]}
-        subtitle="If you can design or write for social media, there's a nonprofit that needs you."
+        subtitle="If you're a student who can design or write for social media, there's a nonprofit that needs you."
         tag="Who we're looking for"
-        title="Creators from every stage of life"
+        title="Students ready to create"
       />
       <Steps
         id="how-it-works"
@@ -390,7 +390,7 @@ function VolunteerPage() {
           {
             question: "Do I need professional experience?",
             answer:
-              "No. Students are welcome. Templates and team-lead reviews help you deliver professional work.",
+              "No. Students of every experience level are welcome. Templates and team-lead reviews help you deliver professional work.",
           },
           {
             question: "What tools do I need?",
@@ -415,7 +415,7 @@ function VolunteerPage() {
             name: "background",
             label: "I am a…",
             required: true,
-            options: ["Design student", "Marketing student", "Freelancer", "Retiree", "Other"],
+            options: ["Design student", "Marketing student", "Other student"],
           },
           {
             type: "textarea",
@@ -466,7 +466,7 @@ function OurWorkPage() {
           { label: "Become a pilot nonprofit", href: "/for-nonprofits#apply" },
           { label: "Volunteer", href: "/volunteer", intent: "secondary" },
         ]}
-        subtitle="Each month we add the posts our volunteers created, with before-and-after engagement numbers for the nonprofit."
+        subtitle="Each month we add the posts our student volunteers created, with before-and-after engagement numbers for the nonprofit."
         tag="Our work"
         title="Real posts, real results"
       />
@@ -482,7 +482,7 @@ function OurWorkPage() {
           },
           {
             title: "The posts",
-            description: "The content our volunteer creators made and published.",
+            description: "The content our student volunteers made and published.",
           },
           {
             title: "Before and after",
@@ -524,20 +524,33 @@ function AboutPage() {
       <Story
         paragraphs={[
           "Small nonprofits do important work, but few have the marketing experience or budget to tell people about it.",
-          "At the same time, design and marketing students, freelancers between gigs and retirees want real projects that make a difference.",
-          "Bannerly brings them together. Volunteers create the content, our core team reviews every post, and nonprofits get marketing that helps their cause get seen.",
+          "At the same time, design and marketing students want real projects that make a difference.",
+          "Bannerly brings them together. Student volunteers create the content, our core team reviews every post, and nonprofits get marketing that helps their cause get seen.",
         ]}
         tag="Our story"
         title="Why Bannerly exists"
       />
       <Team
         groups={[
-          { label: "Founder", people: [{ name: "Ronav", role: "Founder", photo: ronavPhoto }] },
+          {
+            label: "Founder",
+            people: [{ name: "Ronav", role: "Founder", photo: ronavPhoto, href: "#ronav-gopal" }],
+          },
           {
             label: "Mentors",
             people: [
-              { name: "Justin Benjamin", role: "Mentor", photo: justinPhoto },
-              { name: "Vandana Rajendrakumar", role: "Mentor", photo: vandanaPhoto },
+              {
+                name: "Justin Benjamin",
+                role: "Director and Mentor",
+                photo: justinPhoto,
+                href: "#justin-benjamin",
+              },
+              {
+                name: "Vandana Rajendrakumar",
+                role: "Mentor",
+                photo: vandanaPhoto,
+                href: "#vandana-rajendrakumar",
+              },
             ],
           },
         ]}
@@ -556,6 +569,7 @@ function AboutPage() {
           "Ronav Gopal is a sophomore at Hillsborough High School in New Jersey and the founder of Bannerly. He's building the technical and business leadership skills to help other people succeed, with an eye on a career in aeronautics or business marketing.",
           "Bannerly grew out of his own volunteer work: designing websites and digital content for nonprofits showed him how much good marketing helps a cause get seen.",
         ]}
+        id="ronav-gopal"
         name="Ronav Gopal"
         photo={ronavPhoto}
         role="Founder"
@@ -585,10 +599,11 @@ function AboutPage() {
           "He has competed for Team USA in more than 13 countries and mentors high school students as they turn their passions into real-world projects.",
         ]}
         leftTitle="Experience"
+        id="justin-benjamin"
         name="Justin Benjamin"
         photo={justinPhoto}
         rightTitle="Education and athletics"
-        role="Mentor"
+        role="Director and Mentor"
         title="About the Mentor"
         volunteering={[
           {
@@ -619,6 +634,7 @@ function AboutPage() {
           "She brings Bannerly a designer's eye for research, craft and visual storytelling, built through studies and work in India, the UK and the US.",
         ]}
         leftTitle="Experience"
+        id="vandana-rajendrakumar"
         name="Vandana Rajendrakumar"
         photo={vandanaPhoto}
         rightTitle="Education and recognition"
@@ -648,8 +664,8 @@ function AboutPage() {
           },
           {
             icon: <PersonIcon className={icon} />,
-            title: "Powered by volunteers",
-            description: "Creatives build their portfolios while helping causes they care about.",
+            title: "Powered by student volunteers",
+            description: "Students build their portfolios while helping causes they care about.",
           },
         ]}
         tag="How we work"
@@ -681,7 +697,7 @@ function DonatePage() {
           {
             icon: <MixIcon className={icon} />,
             title: "Design tools",
-            description: "Canva, Figma and the templates our volunteers use.",
+            description: "Canva, Figma and the templates our student volunteers use.",
           },
           {
             icon: <GlobeIcon className={icon} />,
@@ -691,7 +707,7 @@ function DonatePage() {
           {
             icon: <LockClosedIcon className={icon} />,
             title: "Insurance",
-            description: "Protection for our organization, volunteers and clients.",
+            description: "Protection for our organization, student volunteers and clients.",
           },
           {
             icon: <RocketIcon className={icon} />,
@@ -717,7 +733,7 @@ function DonatePage() {
           {
             question: "Can I donate software instead of money?",
             answer:
-              "Yes. Software licenses help our volunteers do their best work. Use the form below to get in touch.",
+              "Yes. Software licenses help our student volunteers do their best work. Use the form below to get in touch.",
           },
           {
             question: "Do you accept grants?",
@@ -765,7 +781,7 @@ export const pages: Record<
 > = {
   "/": {
     description:
-      "Free social media and web marketing for small nonprofits, created by volunteer designers and marketers.",
+      "Free social media and web marketing for small nonprofits, created by student volunteer designers and marketers.",
     Component: HomePage,
   },
   "/for-nonprofits": {
@@ -777,13 +793,13 @@ export const pages: Record<
   "/volunteer": {
     title: "Volunteer",
     description:
-      "Design and marketing volunteers build portfolios, earn service hours and help nonprofits get seen.",
+      "Student designers and marketers build portfolios, earn service hours and help nonprofits get seen.",
     Component: VolunteerPage,
   },
   "/our-work": {
     title: "Our Work",
     description:
-      "Posts our volunteers made for nonprofits, with before-and-after engagement results.",
+      "Posts our student volunteers made for nonprofits, with before-and-after engagement results.",
     Component: OurWorkPage,
   },
   "/about": {

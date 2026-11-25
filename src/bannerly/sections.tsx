@@ -1,4 +1,5 @@
 import clsx from "clsx";
+import type { ReactNode } from "react";
 import Image, { type StaticImageData } from "next/image";
 import { CheckIcon } from "@radix-ui/react-icons";
 
@@ -417,6 +418,23 @@ export function PostTiles({
 /*                                    Team                                    */
 /* -------------------------------------------------------------------------- */
 
+function PersonCard({ href, children }: { href?: string; children: ReactNode }) {
+  const className =
+    "border-border flex h-full flex-col items-center gap-3 rounded-lg border p-5 text-center";
+  if (!href) return <div className={className}>{children}</div>;
+  return (
+    <a
+      className={clsx(
+        className,
+        "hover:border-accent-500 hover:bg-surface-secondary focus-visible:outline-accent-500 transition-colors",
+      )}
+      href={href}
+    >
+      {children}
+    </a>
+  );
+}
+
 export function Team({
   tag,
   title,
@@ -428,7 +446,7 @@ export function Team({
   subtitle?: string;
   groups: {
     label: string;
-    people: { name: string; role: string; photo?: StaticImageData }[];
+    people: { name: string; role: string; photo?: StaticImageData; href?: string }[];
   }[];
 }) {
   return (
@@ -444,34 +462,33 @@ export function Team({
             </h3>
             <ul className="flex flex-wrap justify-center gap-4">
               {group.people.map((person, i) => (
-                <li
-                  key={`${person.name}-${i}`}
-                  className="border-border flex w-[170px] flex-col items-center gap-3 rounded-lg border p-5 text-center"
-                >
-                  {person.photo ? (
-                    <Image
-                      alt={person.name}
-                      className="size-14 rounded-full object-cover"
-                      placeholder="blur"
-                      sizes="56px"
-                      src={person.photo}
-                    />
-                  ) : (
-                    <span
-                      aria-hidden
-                      className="bg-accent-100 text-accent-600 flex size-14 items-center justify-center rounded-full text-xl font-medium"
-                    >
-                      {person.name === "To be announced" ? (
-                        <FlagMark className="size-6 opacity-60" />
-                      ) : (
-                        person.name.charAt(0)
-                      )}
-                    </span>
-                  )}
-                  <div className="flex flex-col">
-                    <p className="font-medium">{person.name}</p>
-                    <p className="text-text-tertiary text-sm">{person.role}</p>
-                  </div>
+                <li key={`${person.name}-${i}`} className="w-[170px]">
+                  <PersonCard href={person.href}>
+                    {person.photo ? (
+                      <Image
+                        alt={person.name}
+                        className="size-14 rounded-full object-cover"
+                        placeholder="blur"
+                        sizes="56px"
+                        src={person.photo}
+                      />
+                    ) : (
+                      <span
+                        aria-hidden
+                        className="bg-accent-100 text-accent-600 flex size-14 items-center justify-center rounded-full text-xl font-medium"
+                      >
+                        {person.name === "To be announced" ? (
+                          <FlagMark className="size-6 opacity-60" />
+                        ) : (
+                          person.name.charAt(0)
+                        )}
+                      </span>
+                    )}
+                    <div className="flex flex-col">
+                      <p className="font-medium">{person.name}</p>
+                      <p className="text-text-tertiary text-sm">{person.role}</p>
+                    </div>
+                  </PersonCard>
                 </li>
               ))}
             </ul>
@@ -695,6 +712,7 @@ export function Founder({
   volunteering,
   extracurriculars,
   photo,
+  id,
   leftTitle = "Volunteering",
   rightTitle = "Extracurriculars",
 }: {
@@ -702,6 +720,7 @@ export function Founder({
   name: string;
   role: string;
   photo?: StaticImageData;
+  id?: string;
   leftTitle?: string;
   rightTitle?: string;
   intro: string[];
@@ -709,7 +728,7 @@ export function Founder({
   extracurriculars: string[];
 }) {
   return (
-    <Section>
+    <Section className="scroll-mt-24" id={id}>
       <article className="border-border bg-surface-secondary flex w-full flex-col gap-10 rounded-xl border p-6 md:p-10 lg:flex-row lg:gap-16">
         <div className="flex flex-col gap-4 lg:w-2/5">
           <p className="text-accent-500 text-sm font-medium">{role}</p>
