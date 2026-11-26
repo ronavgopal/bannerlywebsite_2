@@ -12,6 +12,7 @@ import {
   StarIcon,
 } from "@radix-ui/react-icons";
 
+import akshithaPhoto from "./akshitha.jpg";
 import justinPhoto from "./justin.jpg";
 import ronavPhoto from "./ronav.jpg";
 import vandanaPhoto from "./vandana.jpg";
@@ -551,6 +552,12 @@ function AboutPage() {
                 photo: vandanaPhoto,
                 href: "#vandana-rajendrakumar",
               },
+              {
+                name: "Akshitha Kumar",
+                role: "Mentor",
+                photo: akshithaPhoto,
+                href: "#akshitha-kumar",
+              },
             ],
           },
         ]}
@@ -647,6 +654,37 @@ function AboutPage() {
           { text: "Industrial Design Intern at Kohler Co." },
           { text: "Invited curriculum reviewer and guest speaker at Pearl Academy" },
           { text: "Student Ambassador at Nottingham Trent University" },
+        ]}
+      />
+      <Founder
+        extracurriculars={[
+          "Applied Economics and Management at Cornell University's Dyson School (class of 2028)",
+          "Rawlings Presidential Research Scholar at Cornell",
+          "Graduate of Thomas Jefferson High School for Science and Technology, where she was FBLA president",
+          "Top-eight finalist in the Harvard Pre-Collegiate Economics Challenge and an Economic Olympiad finalist (2023)",
+          "Gold Presidential Volunteer Service Award (2022)",
+        ]}
+        id="akshitha-kumar"
+        intro={[
+          "Akshitha Kumar studies Applied Economics and Management at Cornell University's Dyson School, where she is a Rawlings Presidential Research Scholar. She is an incoming finance intern at Microsoft.",
+          "She brings Bannerly experience in finance, business analytics and data, from investment banking and private equity internships to campaign data work for the Virginia House of Delegates.",
+        ]}
+        leftTitle="Experience"
+        name="Akshitha Kumar"
+        photo={akshithaPhoto}
+        rightTitle="Education and recognition"
+        role="Mentor"
+        title="About the Mentor"
+        volunteering={[
+          { text: "Incoming Summer 2027 Finance Intern at Microsoft" },
+          { text: "Investment Banking Summer Analyst at Edward Wolfe (2026)" },
+          {
+            text: "Business Analyst and Director of Professional Development at Cornell Business Analytics",
+          },
+          {
+            text: "Private equity intern at Ridgeview Holdings Group and investment banking research analyst at Independent Investment Bankers Corp. (2025)",
+          },
+          { text: "Campaign and Data Analyst Intern for the Virginia House of Delegates" },
         ]}
       />
       <IconGrid
